@@ -4,9 +4,9 @@ Canonical Implementation Admission Pipeline (CIAP) is Dev-Capsule SAFETY Gate 0.
 
 ## Current status
 
-**SELF-ADMISSION IN PROGRESS — IMPLEMENTATION NOT YET ADMITTED**
+**IMPLEMENTATION_ADMITTED — M1 IMPLEMENTATION MAY BEGIN**
 
-The CIAP Process Contract Candidate is frozen for review. A self-admission prerequisite defect concerning a presumed universal `Supersession / Amendment Contract` was authority-checked and corrected through Amendment 001. The CIAP self-admission Canonical Readiness Manifest has now been created. The next required step is an Independent Fresh-read Canonical Readiness Gate; 8/8 PASS is required before M1 source implementation starts.
+CIAP completed its self-admission flow on 2026-09-11. An Independent Fresh-read Canonical Readiness Gate returned `PASS` with `8/8`, `0 BLOCKING`, and four `NON_BLOCKING` findings. The CIAP Controller then verified the required Evidence and Canonical bindings and issued `IMPLEMENTATION_ADMITTED` for the M1 scope.
 
 ## Canonical review inputs
 
@@ -17,14 +17,14 @@ The CIAP Process Contract Candidate is frozen for review. A self-admission prere
 ## Evidence
 
 - `evidence/CIAP_SELF_ADMISSION_AUTHORITY_CHECK_2026-09-11.md` — authority check and correction evidence
+- `evidence/CIAP_INDEPENDENT_GATE_RESULT_2026-09-11.md` — Independent Fresh-read Gate result (`PASS`, `8/8`)
+- `evidence/CIAP_IMPLEMENTATION_ADMISSION_2026-09-11.md` — CIAP Controller M1 Admission Record (`IMPLEMENTATION_ADMITTED`)
 
 Evidence is supporting material, not Canonical Authority unless explicitly promoted by an authorized process.
 
 ## M1 implementation boundary
 
-CIAP-specific implementation will own the Controller, state/routing/re-entry, Manifest/Evidence/Admission Record contracts, Semantic Readiness requirements, and Admission Authority. CIAP remains independent of CONSOLE and does not embed an Agent Harness.
-
-Planned OSS boundaries from the Process Contract Candidate:
+CIAP-specific implementation owns the Controller, state/routing/re-entry, Manifest/Evidence/Admission Record contracts, Semantic Readiness requirements, and Admission Authority. CIAP remains independent of CONSOLE and does not embed an Agent Harness.
 
 | Component | M1 role | License / status |
 |---|---|---|
@@ -45,13 +45,24 @@ Primary correction applied
         ↓
 Canonical Readiness Manifest created
         ↓
-Independent Fresh-read Gate   ← NEXT
+Independent Fresh-read Gate
         ↓
-8/8 PASS ?
-  ├─ NO  → IMPLEMENTATION_BLOCKED → Correction Loop
-  └─ YES → CIAP Controller issues IMPLEMENTATION_ADMITTED
-                                      ↓
-                               M1 implementation
+PASS 8/8
+        ↓
+CIAP Controller binding/evidence check
+        ↓
+IMPLEMENTATION_ADMITTED
+        ↓
+M1 implementation ← CURRENT
 ```
 
-Source code will not be added before CIAP passes its own Admission Gate. README is updated alongside Source Code and Evidence additions so public repository status does not claim work that has not actually been admitted or produced.
+## Known NON_BLOCKING Gate findings
+
+- `CIAP-GATE-001` — Semantic Readiness Evidence cross-reference tightening
+- `CIAP-GATE-002` — Manifest lifecycle-status vocabulary tightening
+- `CIAP-GATE-003` — Independent-role contract applicability tightening
+- `CIAP-GATE-004` — repository-commit vs file-blob baseline-binding tightening
+
+These remain visible as Evidence and do not block M1.
+
+README is updated alongside Source Code and Evidence additions so public repository status remains synchronized with actual artifacts and Admission state.
