@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ciap.local/schemas/gate-evidence.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["gateResults", "findings"],
+  "properties": {
+    "gateResults": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["gate", "decision", "evidence", "reason"],
+        "properties": {
+          "gate": {"type": "integer", "minimum": 1, "maximum": 8},
+          "decision": {"enum": ["PASS", "BLOCKING"]},
+          "evidence": {"type": "string"},
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "classification", "scope", "reason"],
+        "properties": {
+          "id": {"type": "string"},
+          "classification": {"enum": ["BLOCKING", "NON_BLOCKING", "OUT_OF_SCOPE"]},
+          "scope": {"type": "string"},
+          "reason": {"type": "string"}
+        }
+      }
+    }
+  }
+}
