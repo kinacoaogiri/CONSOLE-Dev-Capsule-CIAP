@@ -4,7 +4,7 @@ Canonical Implementation Admission Pipeline (CIAP) is Dev-Capsule SAFETY Gate 0.
 
 ## Current status
 
-**IMPLEMENTATION_ADMITTED — M1 IMPLEMENTATION MAY PROCEED**
+**IMPLEMENTATION_ADMITTED — M1 IMPLEMENTATION STARTED**
 
 Post-NORM Responsibility Migration RC2 completed the required lifecycle on 2026-09-12:
 
@@ -16,6 +16,7 @@ Amendment 002 ADOPTED
 → Independent Fresh Gate PASS 8/8
 → Findings NONE
 → CIAP Controller IMPLEMENTATION_ADMITTED
+→ M1 implementation STARTED
 ```
 
 ## Responsibility architecture
@@ -38,19 +39,45 @@ NORM performs design normalization. Canonical Governance owns authoritative Cano
 ## Current Canonical / Evidence
 
 - `Canonical_Implementation_Admission_Pipeline_CIAP.md` — consolidated current CIAP Process Contract after NORM migration
-- `canonical/CIAP_AMENDMENT_001_Governance-Authority-Resolution_2026-09-11.md` — historical/current lineage for Authority Resolution correction
-- `canonical/CIAP_AMENDMENT_002_NORM-Responsibility-Migration_2026-09-11.md` — responsibility migration amendment
-- `canonical/CIAP_AMENDMENT_002_ADOPTION_RECORD_2026-09-11.md` — adoption record
-- `canonical/CIAP_CANONICAL_READINESS_MANIFEST_NORM_MIGRATION_RC2_2026-09-12.md` — RC2 review/admission Manifest record
-- `evidence/NORM_CIAP_RC3_NORMALIZATION_COMPLETE_2026-09-11.md` — NORM completion evidence
-- `evidence/CIAP_INDEPENDENT_GATE_RESULT_NORM_MIGRATION_RC2_2026-09-12.md` — Fresh Gate PASS 8/8
-- `evidence/CIAP_IMPLEMENTATION_ADMISSION_NORM_MIGRATION_RC2_2026-09-12.md` — successor Admission record
+- `canonical/CIAP_AMENDMENT_001_Governance-Authority-Resolution_2026-09-11.md`
+- `canonical/CIAP_AMENDMENT_002_NORM-Responsibility-Migration_2026-09-11.md`
+- `canonical/CIAP_AMENDMENT_002_ADOPTION_RECORD_2026-09-11.md`
+- `canonical/CIAP_CANONICAL_READINESS_MANIFEST_NORM_MIGRATION_RC2_2026-09-12.md`
+- `evidence/NORM_CIAP_RC3_NORMALIZATION_COMPLETE_2026-09-11.md`
+- `evidence/CIAP_INDEPENDENT_GATE_RESULT_NORM_MIGRATION_RC2_2026-09-12.md`
+- `evidence/CIAP_IMPLEMENTATION_ADMISSION_NORM_MIGRATION_RC2_2026-09-12.md`
 
-Historical pre-NORM Manifest/Gate/Admission evidence remains in the repository as lineage and does not override the current RC2 state.
+Historical pre-NORM Manifest/Gate/Admission evidence remains lineage and does not override current RC2 state.
 
-## M1 implementation boundary
+## M1 implementation
 
-CIAP-specific implementation owns the Controller, state/routing/re-entry, Manifest/Evidence/Admission Record contracts, Semantic Readiness requirements, and Admission Authority. CIAP remains independent of CONSOLE and does not embed an Agent Harness or NORM runtime.
+Implemented first executable slice:
+
+- `src/controller.js`
+  - BOOTSTRAP / STEADY_STATE mode determination
+  - Gate 8/8 classification
+  - Controller-only Admission issuance
+  - exact Canonical binding change → `ADMISSION_STALE`
+  - independent Impact Evidence handling
+- `schemas/manifest.schema.json`
+  - closed Manifest structural contract
+- `schemas/gate-evidence.schema.json`
+  - eight Gate results + Finding structure
+- `test/controller.test.js`
+  - lifecycle invariants for mode, Gate, Admission, stale, unbound change, impact/re-Gate
+- `package.json`
+  - Node 20+ / Ajv M1 baseline
+
+### Remaining M1 sequence
+
+1. Finding + Admission Record schemas
+2. Ajv validation adapter / CLI
+3. OPA/Rego policy boundary
+4. explicit routing/re-entry model
+5. Git/CI change-event adapter and exact binding comparison
+6. full M1 tests + implementation Evidence
+
+## M1 OSS boundary
 
 | Component | M1 role | License / status |
 |---|---|---|
@@ -59,19 +86,10 @@ CIAP-specific implementation owns the Controller, state/routing/re-entry, Manife
 | Git / existing CI event mechanism | Canonical change event source | Git: GPL-2.0; CI depends on environment |
 | Conftest | Not adopted in M1 | Apache-2.0 |
 | CUE | Not adopted in M1 | Apache-2.0 |
-| in-toto | Hold for later phase | Apache-2.0 |
-| OpenFeature | Hold for later phase | Apache-2.0 |
-| Backstage ADR method | Reference only | Not an Authority mechanism |
-| Agent Harness | Outside CIAP implementation scope | — |
-| NORM runtime / Runner | Outside CIAP implementation scope | upstream responsibility, not runtime-coupled |
-
-## M1 implementation sequence
-
-1. CIAP Controller and lifecycle state model
-2. Manifest / Finding / Gate Evidence / Admission Record JSON Schemas with Ajv validation
-3. OPA/Rego policy boundary for mechanical policy decisions
-4. Routing and re-entry behavior
-5. Canonical binding and Git/CI change-event handling
-6. tests and Evidence
+| in-toto | Hold | Apache-2.0 |
+| OpenFeature | Hold | Apache-2.0 |
+| Backstage ADR method | Reference only | Not Authority |
+| Agent Harness | Outside CIAP | — |
+| NORM runtime / Runner | Outside CIAP runtime | upstream responsibility |
 
 README is updated alongside Source Code and Evidence/Canonical additions so repository status remains synchronized with actual artifacts and Admission state.
