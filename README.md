@@ -1,16 +1,22 @@
 # CONSOLE-Dev-Capsule-CIAP
 
-Canonical Implementation Admission Pipeline (CIAP) is Dev-Capsule SAFETY Gate 0. It verifies whether a Subsystem's fixed Canonical specification is sufficiently authoritative, closed, and unambiguous to permit implementation.
+Canonical Implementation Admission Pipeline (CIAP) is Dev-Capsule SAFETY Gate 0. It verifies whether a Subsystem's authoritative Canonical specification is sufficiently closed and unambiguous to permit implementation.
 
 ## Current status
 
-**ADMISSION_STALE — RE-GATE REQUIRED**
+**IMPLEMENTATION_ADMITTED — M1 IMPLEMENTATION MAY PROCEED**
 
-CIAP previously completed self-admission on 2026-09-11 and received `IMPLEMENTATION_ADMITTED` for its then-bound Canonical. That Admission remains valid historical Evidence for the exact Canonical it bound.
+Post-NORM Responsibility Migration RC2 completed the required lifecycle on 2026-09-12:
 
-NORM — Agent-oriented Design Normalization — has since been frozen as the upstream normalization responsibility. `canonical/CIAP_AMENDMENT_002_NORM-Responsibility-Migration_2026-09-11.md` removes normalization/transformation ownership from CIAP while preserving CIAP's independent verification and Admission responsibilities.
-
-Because Amendment 002 changes CIAP's own Process Contract responsibility model, the prior Admission does not admit the amended Canonical. CIAP is therefore `ADMISSION_STALE` until the amended input set passes normalization/readiness review and a new Independent Fresh-read Gate.
+```text
+Amendment 002 ADOPTED
+→ prior Admission ADMISSION_STALE
+→ NORM(CIAP) NORMALIZATION_COMPLETE
+→ consolidated Current Canonical RC2
+→ Independent Fresh Gate PASS 8/8
+→ Findings NONE
+→ CIAP Controller IMPLEMENTATION_ADMITTED
+```
 
 ## Responsibility architecture
 
@@ -18,35 +24,29 @@ Because Amendment 002 changes CIAP's own Process Contract responsibility model, 
 Design Corpus
     ↓
 NORM
-Normalize / Transform
+Transform / Normalize
     ↓
 Canonical Governance
-Authority / Canonical status
+Authority / Canonical / Lineage
     ↓
 CIAP
-Verify / Admit
-    ↓
-IMPLEMENTATION_ADMITTED or IMPLEMENTATION_BLOCKED
+Verify / Classify / Admit
 ```
 
-NORM performs normalization. Canonical Governance owns authoritative Canonical status and authorized design/Authority decisions. CIAP verifies the resulting Canonical and controls implementation Admission.
+NORM performs design normalization. Canonical Governance owns authoritative Canonical status and authorized design/Authority decisions. CIAP independently verifies the resulting Canonical and controls implementation Admission. CIAP does not normalize design meaning merely to make a Gate pass.
 
-CIAP may re-check the same semantic dimensions during Review A/B and Gate, but such checks are verification only and do not make CIAP the owner of normalization.
+## Current Canonical / Evidence
 
-## Canonical review inputs
+- `Canonical_Implementation_Admission_Pipeline_CIAP.md` — consolidated current CIAP Process Contract after NORM migration
+- `canonical/CIAP_AMENDMENT_001_Governance-Authority-Resolution_2026-09-11.md` — historical/current lineage for Authority Resolution correction
+- `canonical/CIAP_AMENDMENT_002_NORM-Responsibility-Migration_2026-09-11.md` — responsibility migration amendment
+- `canonical/CIAP_AMENDMENT_002_ADOPTION_RECORD_2026-09-11.md` — adoption record
+- `canonical/CIAP_CANONICAL_READINESS_MANIFEST_NORM_MIGRATION_RC2_2026-09-12.md` — RC2 review/admission Manifest record
+- `evidence/NORM_CIAP_RC3_NORMALIZATION_COMPLETE_2026-09-11.md` — NORM completion evidence
+- `evidence/CIAP_INDEPENDENT_GATE_RESULT_NORM_MIGRATION_RC2_2026-09-12.md` — Fresh Gate PASS 8/8
+- `evidence/CIAP_IMPLEMENTATION_ADMISSION_NORM_MIGRATION_RC2_2026-09-12.md` — successor Admission record
 
-- `Canonical_Implementation_Admission_Pipeline_CIAP.md` — Primary Process Contract Candidate
-- `canonical/CIAP_AMENDMENT_001_Governance-Authority-Resolution_2026-09-11.md` — target-project Authority Resolution correction to Primary §7
-- `canonical/CIAP_AMENDMENT_002_NORM-Responsibility-Migration_2026-09-11.md` — transfers normalization responsibility upstream to NORM and marks prior Admission stale
-- `canonical/CIAP_CANONICAL_READINESS_MANIFEST_2026-09-11.md` — historical self-admission Manifest; must be refreshed/rebound before successor Admission
-
-## Evidence
-
-- `evidence/CIAP_SELF_ADMISSION_AUTHORITY_CHECK_2026-09-11.md` — historical authority check and correction Evidence
-- `evidence/CIAP_INDEPENDENT_GATE_RESULT_2026-09-11.md` — historical Independent Fresh-read Gate result (`PASS`, `8/8`)
-- `evidence/CIAP_IMPLEMENTATION_ADMISSION_2026-09-11.md` — historical CIAP Controller Admission Record (`IMPLEMENTATION_ADMITTED`) for the pre-Amendment-002 binding
-
-Evidence is supporting material, not Canonical Authority unless explicitly promoted by an authorized process.
+Historical pre-NORM Manifest/Gate/Admission evidence remains in the repository as lineage and does not override the current RC2 state.
 
 ## M1 implementation boundary
 
@@ -63,32 +63,15 @@ CIAP-specific implementation owns the Controller, state/routing/re-entry, Manife
 | OpenFeature | Hold for later phase | Apache-2.0 |
 | Backstage ADR method | Reference only | Not an Authority mechanism |
 | Agent Harness | Outside CIAP implementation scope | — |
-| NORM runtime / Runner | Outside CIAP implementation scope | responsibility is upstream, not runtime-coupled |
+| NORM runtime / Runner | Outside CIAP implementation scope | upstream responsibility, not runtime-coupled |
 
-## Admission state
+## M1 implementation sequence
 
-```text
-Historical Canonical
-→ Independent Fresh-read Gate PASS 8/8
-→ IMPLEMENTATION_ADMITTED
+1. CIAP Controller and lifecycle state model
+2. Manifest / Finding / Gate Evidence / Admission Record JSON Schemas with Ajv validation
+3. OPA/Rego policy boundary for mechanical policy decisions
+4. Routing and re-entry behavior
+5. Canonical binding and Git/CI change-event handling
+6. tests and Evidence
 
-NORM responsibility separated and frozen
-→ CIAP Amendment 002
-→ bound Process Contract changed
-→ ADMISSION_STALE ← CURRENT
-→ amended Canonical normalization/readiness review
-→ refreshed Manifest binding
-→ Independent Fresh-read Gate
-→ successor Admission decision
-```
-
-## Historical NON_BLOCKING Gate findings
-
-- `CIAP-GATE-001` — Semantic Readiness Evidence cross-reference tightening
-- `CIAP-GATE-002` — Manifest lifecycle-status vocabulary tightening
-- `CIAP-GATE-003` — Independent-role contract applicability tightening
-- `CIAP-GATE-004` — repository-commit vs file-blob baseline-binding tightening
-
-These remain historical Evidence. Their applicability to the amended Canonical is determined by the successor review rather than assumed.
-
-README is updated alongside Source Code and Evidence/Canonical additions so public repository status remains synchronized with actual artifacts and Admission state.
+README is updated alongside Source Code and Evidence/Canonical additions so repository status remains synchronized with actual artifacts and Admission state.
